@@ -514,15 +514,18 @@ int main(int argc, char** argv) {
     
     int nlsampmu = lexical_cast<int>(argv[10]);
     int nusampmu = lexical_cast<int>(argv[11]);
+    
+    int nxtip = lexical_cast<int>(argv[12]);
+    int nmutip = lexical_cast<int>(argv[13]);
 
-    double D = lexical_cast<double>(argv[12]);
-    double theta = lexical_cast<double>(argv[13]);
+    double D = lexical_cast<double>(argv[14]);
+    double theta = lexical_cast<double>(argv[15]);
 
-    int numthreads = lexical_cast<int>(argv[14]);
+    int numthreads = lexical_cast<int>(argv[16]);
 
-    int resi = lexical_cast<int>(argv[15]);
+    int resi = lexical_cast<int>(argv[17]);
 
-    bool sample = lexical_cast<bool>(argv[16]);
+    bool sample = lexical_cast<bool>(argv[18]);
 
 #ifdef AMAZON
     //    path resdir("/home/ubuntu/Dropbox/Amazon EC2/Simulation Results/Gutzwiller Phase Diagram");
@@ -701,6 +704,30 @@ int main(int argc, char** argv) {
                     points.push(point);
                 }
             }
+            for (int ix = 0; ix < nldx*(nsampx - 1); ix++) {
+                double sx = xmin + dlsampx * ix / nldx;
+                if (sx > get<0>(lsampbound.back()))
+                    continue;
+                //                double mu0 = 0.03615582350346575 - 5.005273114442404e-14*x[ix] + 6.275817853250553e-24*x[ix]*x[ix] - 1.4195907309128102e-35*x[ix]*x[ix]*x[ix]; // Delta = 0.25
+                //                double mu0 = 0.025470163481530313 - 2.2719398923789667e-13*x[ix] + 8.92045173286913e-24*x[ix]*x[ix] - 2.4033506846113224e-35*x[ix]*x[ix]*x[ix]; // Delta = 0.1
+                //                double mu0 = 0.028572248841708368 - 4.1318226651330257e-13*x[ix] + 1.1199528880961205e-23*x[ix]*x[ix] - 3.0330199477565917e-35*x[ix]*x[ix]*x[ix]; // Delta = 0
+                double mu0 = 0.030969306517268605 + 1.9188880181335529e-13 * sx + 2.5616067018411045e-24 * sx * sx + 1.0173988468289905e-36 * sx * sx * sx; // Delta = 0.25 Lower
+                double mui = max(mumin, mu0 - 2*mulsampwidth);
+//                double muf = 0.5;
+                double muf = max(mumin, mu0 - mulsampwidth);
+                int nmu = 5;
+                deque<double> mu(nmu);
+                    double dmu = (muf - mui) / (nmu - 1);
+                    for (int imu = 0; imu < nmu; imu++) {
+                        mu[imu] = mui + imu * dmu;
+                    }
+                for (int imu = 0; imu < nmu; imu++) {
+                    Point point;
+                    point.x = xmin + dlsampx * ix / nldx;
+                    point.mu = mu[imu];
+                    points.push(point);
+                }
+            }
 
             queue<Point> upoints;
             double muusampwidth = 0.1;
@@ -848,6 +875,27 @@ int main(int argc, char** argv) {
                     points.push(point);
                 }
             }
+            for (int ix = 0; ix < nudx*(nsampx-1); ix++) {
+                double sx = xumin + dusampx * ix / nudx;
+                if (sx > get<0>(usampbound1.back()))
+                    continue;
+                                    double mu0 = 1.0275844755940469 - 1.3286603408812447e-12*sx - 1.9177090288512203e-23*sx*sx + 9.572518996956652e-35*sx*sx*sx - 2.095759744296641e-46*sx*sx*sx*sx; // Delta 0.25
+//                double mui = 0.5;
+                double mui = min(mumax, mu0 + muusampwidth);
+                double muf = min(mumax, mu0 + 2*muusampwidth);
+                int nmu = 5;
+                deque<double> mu(nmu);
+                    double dmu = (muf - mui) / (nmu - 1);
+                    for (int imu = 0; imu < nmu; imu++) {
+                        mu[imu] = mui + imu * dmu;
+                    }
+                for (int imu = 0; imu < nmu; imu++) {
+                    Point point;
+                    point.x = xumin + dusampx * ix / nudx;
+                    point.mu = mu[imu];
+                    points.push(point);
+                }
+            }
 
         }
             
@@ -889,6 +937,27 @@ int main(int argc, char** argv) {
                 }
             }
 
+            double xtip = 2.37e11;
+            double xtipwidth = 2e10;
+            double xtipmin = xtip - xtipwidth;
+            double xtipmax = xtip + xtipwidth;;
+            double dxtip = (xtipmax - xtipmin) / (nxtip - 1);
+            double mutip = 0.2475;
+            double mutipwidth = 0.1;
+            double mutipmin = mutip - mutipwidth;
+            double mutipmax = mutip + mutipwidth;
+            double dmutip = (mutipmax - mutipmin) / (nmutip - 1);
+            for (int ix = 0; ix < nxtip; ix++) {
+                double tx = xtipmin + ix * dxtip;
+                for (int imu = 0; imu < nmutip; imu++) {
+                    double tmu = mutipmin + imu * dmutip;
+                    Point point;
+                    point.x = tx;
+                    point.mu = tmu;
+                    points.push(point);
+                }
+            }
+            
         //        double muwidth = 0.05;
         //        double muwidth = 0.01;
         /*
