@@ -501,8 +501,8 @@ int main(int argc, char** argv) {
     int nntx = 6;
     double ntxmin = 1.8e11;
     double ntxmax = 2.2e11;
-    for (int i = 0; i < nntx; i++) {
-        double ntx = ntxmin + (ntxmax - ntxmin) / (nntx - 1);
+    for (int ix = 0; ix < nntx; ix++) {
+        double ntx = ntxmin + ix * (ntxmax - ntxmin) / (nntx - 1);
         usampx.push_back(ntx);
     }
     nusampx = usampx.size();
