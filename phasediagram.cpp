@@ -951,17 +951,20 @@ int main(int argc, char** argv) {
                 }
             }
 
-//            double xtip = 2.37e11;
+            double xtip = 2.37e11;
+            double xtipwidth = 2e10;
 //            double xtipwidth = 3e10;
-            double xtip = 2.57e11;
-            double xtipwidth = 1e10;
+//            double xtip = 2.57e11;
+//            double xtipwidth = 1e10;
             double xtipmin = xtip - xtipwidth;
             double xtipmax = xtip + xtipwidth;;
             double dxtip = (xtipmax - xtipmin) / (nxtip - 1);
             double mutip = 0.2475;
             double mutipwidth = 0.1;
-            double mutipmin = mutip - mutipwidth;
+            double mutipmin = mutip + mutipwidth;
             double mutipmax = mutip + 2*mutipwidth;
+//            double mutipmin = mutip - mutipwidth;
+//            double mutipmax = mutip + 2*mutipwidth;
             double dmutip = (mutipmax - mutipmin) / (nmutip - 1);
             for (int ix = 0; ix < nxtip; ix++) {
                 double tx = xtipmin + ix * dxtip;
