@@ -484,16 +484,17 @@ int main(int argc, char** argv) {
         }
     }
 
-    int nsampx = lexical_cast<int>(argv[6]);
-    deque<double> lsampx(nsampx);
-    double dlsampx = (xmax - xmin) / (nsampx - 1);
-    for (int isampx = 0; isampx < nsampx; isampx++) {
+    int nlsampx = lexical_cast<int>(argv[6]);
+    deque<double> lsampx(nlsampx);
+    double dlsampx = (xmax - xmin) / (nlsampx - 1);
+    for (int isampx = 0; isampx < nlsampx; isampx++) {
         lsampx[isampx] = xmin + isampx * dlsampx;
     }
-    deque<double> usampx(nsampx);
+    int nusampx = nlsampx / 2;
+    deque<double> usampx(nusampx);
     double xumin = 9e10;
-    double dusampx = (xmax - xumin) / (nsampx - 1);
-    for (int isampx = 0; isampx < nsampx; isampx++) {
+    double dusampx = (xmax - xumin) / (nusampx - 1);
+    for (int isampx = 0; isampx < nusampx; isampx++) {
         usampx[isampx] = xumin + isampx * dusampx;
     }
 
@@ -593,7 +594,7 @@ int main(int argc, char** argv) {
             //            queue<Point> points;
                 queue<Point> lpoints;
             double mulsampwidth = 0.075;
-            for (int ix = 0; ix < nsampx; ix++) {
+            for (int ix = 0; ix < nlsampx; ix++) {
                 //                double mu0 = 0.03615582350346575 - 5.005273114442404e-14*x[ix] + 6.275817853250553e-24*x[ix]*x[ix] - 1.4195907309128102e-35*x[ix]*x[ix]*x[ix]; // Delta = 0.25
                 //                double mu0 = 0.025470163481530313 - 2.2719398923789667e-13*x[ix] + 8.92045173286913e-24*x[ix]*x[ix] - 2.4033506846113224e-35*x[ix]*x[ix]*x[ix]; // Delta = 0.1
                 //                double mu0 = 0.028572248841708368 - 4.1318226651330257e-13*x[ix] + 1.1199528880961205e-23*x[ix]*x[ix] - 3.0330199477565917e-35*x[ix]*x[ix]*x[ix]; // Delta = 0
@@ -640,7 +641,7 @@ int main(int argc, char** argv) {
                 return get<1>(a) < get<1>(b);
             });
             vector<Sample> lsampbound;
-            for (int ix = 0; ix < nsampx; ix++) {
+            for (int ix = 0; ix < nlsampx; ix++) {
                 auto boundary = find_if(lWmuBWfsfmin.begin(), lWmuBWfsfmin.end(), [&](const Sample & a) {
                     return get<0>(a) == lsampx[ix] && get<2>(a) == 1;
                 });
@@ -680,7 +681,7 @@ int main(int argc, char** argv) {
             }
 
             int nldx = 5;
-            for (int ix = 0; ix < nldx*(nsampx - 1); ix++) {
+            for (int ix = 0; ix < nldx*(nlsampx - 1); ix++) {
                 double sx = xmin + dlsampx * ix / nldx;
                 if (sx > get<0>(lsampbound.back()))
                     continue;
@@ -704,7 +705,7 @@ int main(int argc, char** argv) {
                     points.push(point);
                 }
             }
-            for (int ix = 0; ix < nldx*(nsampx - 1); ix++) {
+            for (int ix = 0; ix < nldx*(nlsampx - 1); ix++) {
                 double sx = xmin + dlsampx * ix / nldx;
                 if (sx > get<0>(lsampbound.back()))
                     continue;
@@ -731,7 +732,7 @@ int main(int argc, char** argv) {
 
             queue<Point> upoints;
             double muusampwidth = 0.1;
-            for (int ix = 0; ix < nsampx; ix++) {
+            for (int ix = 0; ix < nusampx; ix++) {
                                     double mu0 = 1.0275844755940469 - 1.3286603408812447e-12*usampx[ix] - 1.9177090288512203e-23*usampx[ix]*usampx[ix] + 9.572518996956652e-35*usampx[ix]*usampx[ix]*usampx[ix] - 2.095759744296641e-46*usampx[ix]*usampx[ix]*usampx[ix]*usampx[ix]; // Delta 0.25
                 double mui = max(mumin, mu0 - muusampwidth);
                 double muf = min(mumax, mu0 + muusampwidth);
@@ -775,7 +776,7 @@ int main(int argc, char** argv) {
                 return get<1>(a) < get<1>(b);
             });
             vector<Sample> usampbound1;
-            for (int ix = 0; ix < nsampx; ix++) {
+            for (int ix = 0; ix < nusampx; ix++) {
                 auto boundary = find_if(uWmuBWfsfmin.begin(), uWmuBWfsfmin.end(), [&](const Sample & a) {
                     return get<0>(a) == usampx[ix] && get<3>(a) == 0;
                 });
@@ -814,7 +815,7 @@ int main(int argc, char** argv) {
                 }
             }
             vector<Sample> usampbound2;
-            for (int ix = 0; ix < nsampx; ix++) {
+            for (int ix = 0; ix < nusampx; ix++) {
                 auto boundary = find_if(uWmuBWfsfmin.begin(), uWmuBWfsfmin.end(), [&](const Sample & a) {
                     return get<0>(a) == usampx[ix] && get<2>(a) == 0;
                 });
@@ -854,7 +855,7 @@ int main(int argc, char** argv) {
             }
 
             int nudx = 5;
-            for (int ix = 0; ix < nudx*(nsampx-1); ix++) {
+            for (int ix = 0; ix < nudx*(nusampx-1); ix++) {
                 double sx = xumin + dusampx * ix / nudx;
                 if (sx > get<0>(usampbound1.back()))
                     continue;
@@ -875,7 +876,7 @@ int main(int argc, char** argv) {
                     points.push(point);
                 }
             }
-            for (int ix = 0; ix < nudx*(nsampx-1); ix++) {
+            for (int ix = 0; ix < nudx*(nusampx-1); ix++) {
                 double sx = xumin + dusampx * ix / nudx;
                 if (sx > get<0>(usampbound1.back()))
                     continue;
