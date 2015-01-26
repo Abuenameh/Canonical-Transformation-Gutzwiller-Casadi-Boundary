@@ -752,6 +752,7 @@ int main(int argc, char** argv) {
                     point.x = usampx[ix];
                     point.mu = mu[imu];
                     upoints.push(point);
+                    points2.push(point);
                 }
             }
 
@@ -1034,7 +1035,7 @@ int main(int argc, char** argv) {
                         }
                     }
                 }*/
-        progress_display progress(points.size());
+        progress_display progress(points2.size());
 
         vector<PointResults> pointRes;
 
