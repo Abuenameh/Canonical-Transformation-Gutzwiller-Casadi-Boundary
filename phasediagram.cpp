@@ -493,7 +493,8 @@ int main(int argc, char** argv) {
     int nusampx = lexical_cast<int>(argv[7]);
     deque<double> usampx(nusampx);
     double xumin = 9e10;
-    double dusampx = (xmax - xumin) / (nusampx - 1);
+    double xumax = 1.8e11;
+    double dusampx = (xumax - xumin) / (nusampx - 1);
     for (int isampx = 0; isampx < nusampx; isampx++) {
         usampx[isampx] = xumin + isampx * dusampx;
     }
