@@ -589,6 +589,7 @@ int main(int argc, char** argv) {
             GroundStateProblem::setup();
 
             queue<Point> points;
+            queue<Point> points2;
         {
             double muwidth = 0.01;
             //            queue<Point> points;
@@ -810,16 +811,17 @@ int main(int argc, char** argv) {
                             point.x = x1 + ix * dx;
                             point.mu = mu[imu];
                             points.push(point);
+                            points2.push(point);
                         }
                     }
                 }
             }
             vector<Sample> usampbound2;
             for (int ix = 0; ix < nusampx; ix++) {
-                auto boundary = find_if(uWmuBWfsfmin.begin(), uWmuBWfsfmin.end(), [&](const Sample & a) {
+                auto boundary = find_if(uWmuBWfsfmin.rbegin(), uWmuBWfsfmin.rend(), [&](const Sample & a) {
                     return get<0>(a) == usampx[ix] && get<2>(a) == 0;
                 });
-                if (boundary != uWmuBWfsfmin.end()) {
+                if (boundary != uWmuBWfsfmin.rend()) {
                     usampbound2.push_back(*boundary);
                 }
             }
@@ -849,6 +851,7 @@ int main(int argc, char** argv) {
                             point.x = x1 + ix * dx;
                             point.mu = mu[imu];
                             points.push(point);
+                            points2.push(point);
                         }
                     }
                 }
@@ -1039,7 +1042,7 @@ int main(int argc, char** argv) {
         thread_group threads;
         for (int i = 0; i < numthreads; i++) {
             //                        threads.emplace_back(phasepoints, std::ref(xi), theta, std::ref(points), std::ref(f0res), std::ref(E0res), std::ref(Ethres), std::ref(fsres), std::ref(progress));
-            threads.create_thread(bind(&phasepoints, boost::ref(xi), theta, boost::ref(points), boost::ref(pointRes), boost::ref(progress)));
+            threads.create_thread(bind(&phasepoints, boost::ref(xi), theta, boost::ref(points2), boost::ref(pointRes), boost::ref(progress)));
         }
         threads.join_all();
 
