@@ -497,6 +497,14 @@ int main(int argc, char** argv) {
     for (int isampx = 0; isampx < nusampx; isampx++) {
         usampx[isampx] = xumin + isampx * dusampx;
     }
+    int nntx = 6;
+    double ntxmin = 1.8e11;
+    double ntxmax = 2.2e11;
+    for (int i = 0; i < nntx; i++) {
+        double ntx = ntxmin + (ntxmax - ntxmin) / (nntx - 1);
+        usampx.push_back(ntx);
+    }
+    nusampx = usampx.size();
 
     double mumin = lexical_cast<double>(argv[8]);
     double mumax = lexical_cast<double>(argv[9]);
@@ -924,12 +932,12 @@ int main(int argc, char** argv) {
             }
 
             double lxmin = 2e10;
-            double lxmax = 3e10;
+            double lxmax = 2.5e10;
             int nlx = 4;
             double dlx = (lxmax - lxmin) / (nlx - 1);
             double lmumin = 0;
             double lmumax = 0.5;
-            int nlmu = 6;
+            int nlmu = 10;
             double dlmu = (lmumax - lmumin) / (nlmu - 1);
             for (int ix = 0; ix < nlx; ix++) {
                 double lx = lxmin + ix * dlx;
