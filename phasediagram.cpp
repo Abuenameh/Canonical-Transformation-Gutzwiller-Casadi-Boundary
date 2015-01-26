@@ -1044,7 +1044,7 @@ int main(int argc, char** argv) {
                         }
                     }
                 }*/
-        progress_display progress(points2.size());
+        progress_display progress(points.size());
 
         vector<PointResults> pointRes;
 
@@ -1052,7 +1052,7 @@ int main(int argc, char** argv) {
         thread_group threads;
         for (int i = 0; i < numthreads; i++) {
             //                        threads.emplace_back(phasepoints, std::ref(xi), theta, std::ref(points), std::ref(f0res), std::ref(E0res), std::ref(Ethres), std::ref(fsres), std::ref(progress));
-            threads.create_thread(bind(&phasepoints, boost::ref(xi), theta, boost::ref(points2), boost::ref(pointRes), boost::ref(progress)));
+            threads.create_thread(bind(&phasepoints, boost::ref(xi), theta, boost::ref(points), boost::ref(pointRes), boost::ref(progress)));
         }
         threads.join_all();
 
