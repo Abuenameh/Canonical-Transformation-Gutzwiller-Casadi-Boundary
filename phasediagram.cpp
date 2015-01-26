@@ -490,7 +490,7 @@ int main(int argc, char** argv) {
     for (int isampx = 0; isampx < nlsampx; isampx++) {
         lsampx[isampx] = xmin + isampx * dlsampx;
     }
-    int nusampx = nlsampx / 2;
+    int nusampx = lexical_cast<int>(argv[7]);
     deque<double> usampx(nusampx);
     double xumin = 9e10;
     double dusampx = (xmax - xumin) / (nusampx - 1);
@@ -498,9 +498,9 @@ int main(int argc, char** argv) {
         usampx[isampx] = xumin + isampx * dusampx;
     }
 
-    double mumin = lexical_cast<double>(argv[7]);
-    double mumax = lexical_cast<double>(argv[8]);
-    int nmu = lexical_cast<int>(argv[9]);
+    double mumin = lexical_cast<double>(argv[8]);
+    double mumax = lexical_cast<double>(argv[9]);
+    int nmu = lexical_cast<int>(argv[10]);
 
     deque<double> mu(nmu);
     if (nmu == 1) {
@@ -513,20 +513,20 @@ int main(int argc, char** argv) {
         }
     }
     
-    int nlsampmu = lexical_cast<int>(argv[10]);
-    int nusampmu = lexical_cast<int>(argv[11]);
+    int nlsampmu = lexical_cast<int>(argv[11]);
+    int nusampmu = lexical_cast<int>(argv[12]);
     
-    int nxtip = lexical_cast<int>(argv[12]);
-    int nmutip = lexical_cast<int>(argv[13]);
+    int nxtip = lexical_cast<int>(argv[13]);
+    int nmutip = lexical_cast<int>(argv[14]);
 
-    double D = lexical_cast<double>(argv[14]);
-    double theta = lexical_cast<double>(argv[15]);
+    double D = lexical_cast<double>(argv[15]);
+    double theta = lexical_cast<double>(argv[16]);
 
-    int numthreads = lexical_cast<int>(argv[16]);
+    int numthreads = lexical_cast<int>(argv[17]);
 
-    int resi = lexical_cast<int>(argv[17]);
+    int resi = lexical_cast<int>(argv[18]);
 
-    bool sample = lexical_cast<bool>(argv[18]);
+//    bool sample = lexical_cast<bool>(argv[18]);
 
 #ifdef AMAZON
     //    path resdir("/home/ubuntu/Dropbox/Amazon EC2/Simulation Results/Gutzwiller Phase Diagram");
