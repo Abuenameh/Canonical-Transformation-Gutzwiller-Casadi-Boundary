@@ -732,7 +732,7 @@ int main(int argc, char** argv) {
             queue<Point> upoints;
             double muusampwidth = 0.1;
             for (int ix = 0; ix < nsampx; ix++) {
-                                    double mu0 = 1.0275844755940469 - 1.3286603408812447e-12*x[ix] - 1.9177090288512203e-23*x[ix]*x[ix] + 9.572518996956652e-35*x[ix]*x[ix]*x[ix] - 2.095759744296641e-46*x[ix]*x[ix]*x[ix]*x[ix]; // Delta 0.25
+                                    double mu0 = 1.0275844755940469 - 1.3286603408812447e-12*usampx[ix] - 1.9177090288512203e-23*usampx[ix]*usampx[ix] + 9.572518996956652e-35*usampx[ix]*usampx[ix]*usampx[ix] - 2.095759744296641e-46*usampx[ix]*usampx[ix]*usampx[ix]*usampx[ix]; // Delta 0.25
                 double mui = max(mumin, mu0 - muusampwidth);
                 double muf = min(mumax, mu0 + muusampwidth);
                 deque<double> mu(nusampmu);
