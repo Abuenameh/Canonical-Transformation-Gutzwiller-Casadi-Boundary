@@ -745,7 +745,7 @@ int main(int argc, char** argv) {
             for (int ix = 0; ix < nusampx; ix++) {
                                     double mu0 = 1.0275844755940469 - 1.3286603408812447e-12*usampx[ix] - 1.9177090288512203e-23*usampx[ix]*usampx[ix] + 9.572518996956652e-35*usampx[ix]*usampx[ix]*usampx[ix] - 2.095759744296641e-46*usampx[ix]*usampx[ix]*usampx[ix]*usampx[ix]; // Delta 0.25
                 double mui = max(mumin, mu0 - muusampwidth);
-                double muf = min(mumax, mu0 + muusampwidth);
+                double muf = min(mumax, mu0 + 2*muusampwidth);
                 deque<double> mu(nusampmu);
                 if (nusampmu == 1) {
                     mu[0] = mui;
