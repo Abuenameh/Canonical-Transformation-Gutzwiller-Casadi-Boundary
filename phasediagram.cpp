@@ -493,7 +493,7 @@ int main(int argc, char** argv) {
     int nusampx = lexical_cast<int>(argv[7]);
     deque<double> usampx(nusampx);
     double xumin = 9e10;
-    double xumax = 2.2e11;
+    double xumax = xmax; //2.2e11;
     double dusampx = (xumax - xumin) / (nusampx - 1);
     for (int isampx = 0; isampx < nusampx; isampx++) {
         usampx[isampx] = xumin + isampx * dusampx;
@@ -973,8 +973,8 @@ int main(int argc, char** argv) {
                     Point point;
                     point.x = tx;
                     point.mu = tmu;
-                    points.push(point);
-                    points2.push(point);
+//                    points.push(point);
+//                    points2.push(point);
                 }
             }
             
