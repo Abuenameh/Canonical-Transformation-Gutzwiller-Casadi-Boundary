@@ -591,7 +591,7 @@ int main(int argc, char** argv) {
             queue<Point> points;
             queue<Point> points2;
         {
-            double muwidth = 0.01;
+            double muwidth = 0.02;
             //            queue<Point> points;
                 queue<Point> lpoints;
             double mulsampwidth = 0.075;
@@ -820,7 +820,7 @@ int main(int argc, char** argv) {
             vector<Sample> usampbound2;
             for (int ix = 0; ix < nusampx; ix++) {
                 auto boundary = find_if(uWmuBWfsfmin.rbegin(), uWmuBWfsfmin.rend(), [&](const Sample & a) {
-                    return get<0>(a) == usampx[ix] && get<2>(a) == 0;
+                    return get<0>(a) == usampx[ix] && get<2>(a) != 0;
                 });
                 if (boundary != uWmuBWfsfmin.rend()) {
                     usampbound2.push_back(*boundary);
