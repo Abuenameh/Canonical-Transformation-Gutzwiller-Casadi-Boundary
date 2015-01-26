@@ -493,19 +493,19 @@ int main(int argc, char** argv) {
     int nusampx = lexical_cast<int>(argv[7]);
     deque<double> usampx(nusampx);
     double xumin = 9e10;
-    double xumax = 1.8e11;
+    double xumax = 2.2e11;
     double dusampx = (xumax - xumin) / (nusampx - 1);
     for (int isampx = 0; isampx < nusampx; isampx++) {
         usampx[isampx] = xumin + isampx * dusampx;
     }
-    int nntx = 6;
-    double ntxmin = 1.8e11;
-    double ntxmax = 2.2e11;
-    for (int ix = 0; ix < nntx; ix++) {
-        double ntx = ntxmin + ix * (ntxmax - ntxmin) / (nntx - 1);
-        usampx.push_back(ntx);
-    }
-    nusampx = usampx.size();
+//    int nntx = 6;
+//    double ntxmin = 1.8e11;
+//    double ntxmax = 2.2e11;
+//    for (int ix = 0; ix < nntx; ix++) {
+//        double ntx = ntxmin + ix * (ntxmax - ntxmin) / (nntx - 1);
+//        usampx.push_back(ntx);
+//    }
+//    nusampx = usampx.size();
 
     double mumin = lexical_cast<double>(argv[8]);
     double mumax = lexical_cast<double>(argv[9]);
