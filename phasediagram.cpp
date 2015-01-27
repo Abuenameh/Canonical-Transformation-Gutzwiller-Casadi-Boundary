@@ -788,7 +788,10 @@ int main(int argc, char** argv) {
             });
             vector<Sample> usampbound1;
             for (int ix = 0; ix < nusampx; ix++) {
-                auto boundary = find_if(uWmuBWfsfmin.begin(), uWmuBWfsfmin.end(), [&](const Sample & a) {
+                auto inner = find_if(uWmuBWfsfmin.begin(), uWmuBWfsfmin.end(), [&](const Sample& a) {
+                    return get<0>(a) == usampx[ix] && get<3>(a) == 1;
+                });
+                auto boundary = find_if(inner, uWmuBWfsfmin.end(), [&](const Sample & a) {
                     return get<0>(a) == usampx[ix] && get<3>(a) == 0;
                 });
                 if (boundary != uWmuBWfsfmin.end()) {
