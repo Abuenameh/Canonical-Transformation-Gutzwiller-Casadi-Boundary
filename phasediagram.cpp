@@ -954,16 +954,16 @@ int main(int argc, char** argv) {
                 }
             }
 
-            double xtip = 2.37e11;
-            double xtipwidth = 2e10;
+            double xtip = 2.5e11;
+            double xtipwidth = 3e10;
 //            double xtipwidth = 3e10;
 //            double xtip = 2.57e11;
 //            double xtipwidth = 1e10;
             double xtipmin = xtip - xtipwidth;
             double xtipmax = xtip + xtipwidth;;
             double dxtip = (xtipmax - xtipmin) / (nxtip - 1);
-            double mutip = 0.2475;
-            double mutipwidth = 0.1;
+            double mutip = 0.26;
+            double mutipwidth = 0.05;
             double mutipmin = mutip + mutipwidth;
             double mutipmax = mutip + 2*mutipwidth;
 //            double mutipmin = mutip - mutipwidth;
@@ -976,7 +976,7 @@ int main(int argc, char** argv) {
                     Point point;
                     point.x = tx;
                     point.mu = tmu;
-//                    points.push(point);
+                    points.push(point);
 //                    points2.push(point);
                 }
             }
@@ -1053,7 +1053,7 @@ int main(int argc, char** argv) {
                         }
                     }
                 }*/
-        progress_display progress(points2.size());
+        progress_display progress(points.size());
 
         vector<PointResults> pointRes;
 
@@ -1061,7 +1061,7 @@ int main(int argc, char** argv) {
         thread_group threads;
         for (int i = 0; i < numthreads; i++) {
             //                        threads.emplace_back(phasepoints, std::ref(xi), theta, std::ref(points), std::ref(f0res), std::ref(E0res), std::ref(Ethres), std::ref(fsres), std::ref(progress));
-            threads.create_thread(bind(&phasepoints, boost::ref(xi), theta, boost::ref(points2), boost::ref(pointRes), boost::ref(progress)));
+            threads.create_thread(bind(&phasepoints, boost::ref(xi), theta, boost::ref(points), boost::ref(pointRes), boost::ref(progress)));
         }
         threads.join_all();
 
