@@ -506,7 +506,6 @@ int main(int argc, char** argv) {
     for (int isampx = 0; isampx < nusampx; isampx++) {
         usampx[isampx] = xumin + isampx * dusampx;
     }
-    cout << ::math(usampx) << endl;
     //    int nntx = 6;
     //    double ntxmin = 1.8e11;
     //    double ntxmax = 2.2e11;
@@ -910,7 +909,7 @@ int main(int argc, char** argv) {
             }
             for (int ix = 0; ix < nudx * (nusampx - 1); ix++) {
                 double sx = xumin + dusampx * ix / nudx;
-                if (sx > get<0>(usampbound1.back()))
+                if (sx > get<0>(usampbound2.back()))
                     continue;
                 //                                    double mu0 = 1.0275844755940469 - 1.3286603408812447e-12*sx - 1.9177090288512203e-23*sx*sx + 9.572518996956652e-35*sx*sx*sx - 2.095759744296641e-46*sx*sx*sx*sx; // Delta 0.25
                 double mu0 = uppermu1(sx);
