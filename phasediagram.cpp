@@ -506,6 +506,7 @@ int main(int argc, char** argv) {
     for (int isampx = 0; isampx < nusampx; isampx++) {
         usampx[isampx] = xumin + isampx * dusampx;
     }
+    cout << usampx << endl;
     //    int nntx = 6;
     //    double ntxmin = 1.8e11;
     //    double ntxmax = 2.2e11;
