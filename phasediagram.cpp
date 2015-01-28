@@ -599,6 +599,7 @@ int main(int argc, char** argv) {
 
             queue<Point> points;
             queue<Point> points2;
+            if (false)
         {
             double muwidth = 0.02;
             //            queue<Point> points;
@@ -931,7 +932,7 @@ int main(int argc, char** argv) {
                     Point point;
                     point.x = corx;
                     point.mu = cormu;
-                    points.push(point);
+//                    points.push(point);
                 }
             }
 
@@ -950,12 +951,12 @@ int main(int argc, char** argv) {
                     Point point;
                     point.x = lx;
                     point.mu = lmu;
-                    points.push(point);
+//                    points.push(point);
                 }
             }
 
             double xtip = 2.4e11;
-            double xtipwidth = 2.1e10;
+            double xtipwidth = 2.5e10;
 //            double xtipwidth = 3e10;
 //            double xtip = 2.57e11;
 //            double xtipwidth = 1e10;
@@ -963,7 +964,7 @@ int main(int argc, char** argv) {
             double xtipmax = xtip + xtipwidth;;
             double dxtip = (xtipmax - xtipmin) / (nxtip - 1);
             double mutip = 0.27;
-            double mutipwidth = 0.08;
+            double mutipwidth = 0.12;
             double mutipmin = mutip - mutipwidth;
             double mutipmax = mutip + mutipwidth;
 //            double mutipmin = mutip - mutipwidth;
