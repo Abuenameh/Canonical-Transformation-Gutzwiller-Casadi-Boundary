@@ -774,7 +774,7 @@ int main(int argc, char** argv) {
                     Point point;
                     point.x = usampx[ix];
                     point.mu = mu[imu];
-                    //                    upoints.push(point);
+                                        upoints.push(point);
                     //                    points2.push(point);
                 }
             }
@@ -904,7 +904,7 @@ int main(int argc, char** argv) {
                     Point point;
                     point.x = xumin + dusampx * ix / nudx;
                     point.mu = mu[imu];
-                    //                    points.push(point);
+//                                        points.push(point);
                 }
             }
             for (int ix = 0; ix < nudx * (nusampx - 1); ix++) {
@@ -926,7 +926,7 @@ int main(int argc, char** argv) {
                     Point point;
                     point.x = xumin + dusampx * ix / nudx;
                     point.mu = mu[imu];
-                    //                    points.push(point);
+//                                        points.push(point);
                 }
             }
 
