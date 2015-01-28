@@ -599,7 +599,7 @@ int main(int argc, char** argv) {
 
             queue<Point> points;
             queue<Point> points2;
-            if (false)
+//            if (false)
         {
             double muwidth = 0.02;
             //            queue<Point> points;
@@ -932,7 +932,7 @@ int main(int argc, char** argv) {
                     Point point;
                     point.x = corx;
                     point.mu = cormu;
-//                    points.push(point);
+                    points.push(point);
                 }
             }
 
@@ -951,7 +951,7 @@ int main(int argc, char** argv) {
                     Point point;
                     point.x = lx;
                     point.mu = lmu;
-//                    points.push(point);
+                    points.push(point);
                 }
             }
 
@@ -977,8 +977,8 @@ int main(int argc, char** argv) {
                     Point point;
                     point.x = tx;
                     point.mu = tmu;
-                    points.push(point);
-                    points2.push(point);
+//                    points.push(point);
+//                    points2.push(point);
                 }
             }
             
