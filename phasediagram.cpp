@@ -914,8 +914,10 @@ int main(int argc, char** argv) {
                 //                                    double mu0 = 1.0275844755940469 - 1.3286603408812447e-12*sx - 1.9177090288512203e-23*sx*sx + 9.572518996956652e-35*sx*sx*sx - 2.095759744296641e-46*sx*sx*sx*sx; // Delta 0.25
                 double mu0 = uppermu1(sx);
                 //                double mui = 0.5;
-                double mui = min(mumax, mu0 + muusampwidth);
-                double muf = min(mumax, mu0 + 2 * muusampwidth);
+//                double mui = min(mumax, mu0 + muusampwidth);
+//                double muf = min(mumax, mu0 + 2 * muusampwidth);
+                double mui = min(mumax, mu0 - muusampwidth);
+                double muf = min(mumax, mu0 + muusampwidth);
                 int nmu = 5;
                 deque<double> mu(nmu);
                 double dmu = (muf - mui) / (nmu - 1);
@@ -926,7 +928,7 @@ int main(int argc, char** argv) {
                     Point point;
                     point.x = xumin + dusampx * ix / nudx;
                     point.mu = mu[imu];
-//                                        points.push(point);
+                                        points.push(point);
                 }
             }
 
