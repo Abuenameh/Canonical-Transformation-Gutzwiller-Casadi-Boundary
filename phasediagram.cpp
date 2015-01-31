@@ -603,6 +603,7 @@ int main(int argc, char** argv) {
         {
             double muwidth = 0.02;
             //            queue<Point> points;
+            /*
                 queue<Point> lpoints;
             double mulsampwidth = 0.075;
             for (int ix = 0; ix < nlsampx; ix++) {
@@ -739,7 +740,7 @@ int main(int argc, char** argv) {
                     point.mu = mu[imu];
                     points.push(point);
                 }
-            }
+            }*/
 
             queue<Point> upoints;
             double muusampwidth = 0.1;
@@ -890,7 +891,7 @@ int main(int argc, char** argv) {
                     Point point;
                     point.x = xumin + dusampx * ix / nudx;
                     point.mu = mu[imu];
-                    points.push(point);
+//                    points.push(point);
                 }
             }
             for (int ix = 0; ix < nudx*(nusampx-1); ix++) {
@@ -911,7 +912,7 @@ int main(int argc, char** argv) {
                     Point point;
                     point.x = xumin + dusampx * ix / nudx;
                     point.mu = mu[imu];
-                    points.push(point);
+//                    points.push(point);
                 }
             }
 
@@ -932,7 +933,7 @@ int main(int argc, char** argv) {
                     Point point;
                     point.x = corx;
                     point.mu = cormu;
-                    points.push(point);
+//                    points.push(point);
                 }
             }
 
@@ -951,7 +952,7 @@ int main(int argc, char** argv) {
                     Point point;
                     point.x = lx;
                     point.mu = lmu;
-                    points.push(point);
+//                    points.push(point);
                 }
             }
 
