@@ -742,7 +742,7 @@ int main(int argc, char** argv) {
                 }
             }*/
 
-            queue<Point> upoints;
+            /*queue<Point> upoints;
             double muusampwidth = 0.1;
             for (int ix = 0; ix < nusampx; ix++) {
                                     double mu0 = 1.0275844755940469 - 1.3286603408812447e-12*usampx[ix] - 1.9177090288512203e-23*usampx[ix]*usampx[ix] + 9.572518996956652e-35*usampx[ix]*usampx[ix]*usampx[ix] - 2.095759744296641e-46*usampx[ix]*usampx[ix]*usampx[ix]*usampx[ix]; // Delta 0.25
@@ -914,7 +914,7 @@ int main(int argc, char** argv) {
                     point.mu = mu[imu];
 //                    points.push(point);
                 }
-            }
+            }*/
 
         }
             
@@ -983,6 +983,32 @@ int main(int argc, char** argv) {
                 }
             }
             
+            double muuwidth = 0.2;
+            for (int ix = 0; ix < nusampx; ix++) {
+                double mu0 = 1.0275844755940469 - 1.3286603408812447e-12*x[ix] - 1.9177090288512203e-23*x[ix]*x[ix] + 9.572518996956652e-35*x[ix]*x[ix]*x[ix] - 2.095759744296641e-46*x[ix]*x[ix]*x[ix]*x[ix]; // Delta 0.25
+                double mui = max(mumin, mu0 - muuwidth);
+                double muf = mu0 + muuwidth; //min(mumax, mu0 + muuwidth);
+                deque<double> mu(nmu);
+                if (nmu == 1) {
+                    mu[0] = mui;
+                }
+                else {
+                    double dmu = (muf - mui) / (nmu - 1);
+                    for (int imu = 0; imu < nmu; imu++) {
+                        mu[imu] = mui + imu * dmu;
+                    }
+                }
+                for (int imu = 0; imu < nusampmu; imu++) {
+                    if (mu[imu] > mumax)
+                        continue;
+                    Point point;
+                    point.x = x[ix];
+                    point.mu = mu[imu];
+                    points.push(point);
+//                    points2.push(point);
+                }
+            }
+
         //        double muwidth = 0.05;
         //        double muwidth = 0.01;
         /*
