@@ -636,11 +636,11 @@ int main(int argc, char** argv) {
                     point.x = lsampx[ix];
                     point.mu = mu[imu];
                     lpoints.push(point);
-                    points.push(point);
+//                    points.push(point);
                 }
             }
 
-            /*progress_display lprogress(lpoints.size());
+            progress_display lprogress(lpoints.size());
 
             vector<PointResults> lpointRes;
 
@@ -751,7 +751,7 @@ int main(int argc, char** argv) {
                     point.mu = mu[imu];
 //                    points.push(point);
                 }
-            }*/
+            }
 
             queue<Point> upoints;
             double muusampwidth = 0.2;
@@ -777,12 +777,12 @@ int main(int argc, char** argv) {
                     point.x = usampx[ix];
                     point.mu = mu[imu];
                                         upoints.push(point);
-                                        points.push(point);
+//                                        points.push(point);
                     //                    points2.push(point);
                 }
             }
 
-            /*progress_display uprogress(upoints.size());
+            progress_display uprogress(upoints.size());
 
             vector<PointResults> upointRes;
 
@@ -880,7 +880,7 @@ int main(int argc, char** argv) {
                             Point point;
                             point.x = x1 + ix * dx;
                             point.mu = mu[imu];
-                            points.push(point);
+//                            points.push(point);
                             //                            points2.push(point);
                         }
                     }
@@ -931,7 +931,7 @@ int main(int argc, char** argv) {
                     point.mu = mu[imu];
 //                                        points.push(point);
                 }
-            }*/
+            }
 
         }
 
@@ -950,7 +950,7 @@ int main(int argc, char** argv) {
                 Point point;
                 point.x = corx;
                 point.mu = cormu;
-                //                    points.push(point);
+                                    points.push(point);
             }
         }
 
@@ -969,7 +969,7 @@ int main(int argc, char** argv) {
                 Point point;
                 point.x = lx;
                 point.mu = lmu;
-                //                    points.push(point);
+                                    points.push(point);
             }
         }
 
@@ -982,7 +982,7 @@ int main(int argc, char** argv) {
         double xtipmax = xtip + xtipwidth;
         ;
         double dxtip = (xtipmax - xtipmin) / (nxtip - 1);
-        double mutip = 0.18;
+        double mutip = 0.22;
         double mutipwidth = 0.15;
         double mutipmin = mutip - mutipwidth;
         double mutipmax = mutip + mutipwidth;
