@@ -939,9 +939,9 @@ int main(int argc, char** argv) {
         double corxmax = 9e10;
         int ncorx = 61;
         double dcorx = (corxmax - corxmin) / (ncorx - 1);
-        double cormumin = 0.5;
+        double cormumin = 0.75;
         double cormumax = 1;
-        int ncormu = 51;
+        int ncormu = 26;
         double dcormu = (cormumax - cormumin) / (ncormu - 1);
         for (int ix = 0; ix < ncorx; ix++) {
             double corx = corxmin + ix * dcorx;
