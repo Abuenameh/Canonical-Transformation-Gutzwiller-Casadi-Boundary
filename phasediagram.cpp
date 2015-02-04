@@ -611,7 +611,7 @@ int main(int argc, char** argv) {
         {
             double muwidth = 0.02;
             //            queue<Point> points;
-            queue<Point> lpoints;
+            /*queue<Point> lpoints;
             double mulsampwidth = 0.075;
             for (int ix = 0; ix < nlsampx; ix++) {
                 //                double mu0 = 0.03615582350346575 - 5.005273114442404e-14*x[ix] + 6.275817853250553e-24*x[ix]*x[ix] - 1.4195907309128102e-35*x[ix]*x[ix]*x[ix]; // Delta = 0.25
@@ -751,7 +751,7 @@ int main(int argc, char** argv) {
                     point.mu = mu[imu];
 //                    points.push(point);
                 }
-            }
+            }*/
 
             queue<Point> upoints;
             double muusampwidth = 0.2;
@@ -840,12 +840,76 @@ int main(int argc, char** argv) {
                             Point point;
                             point.x = x1 + ix * dx;
                             point.mu = mu[imu];
+//                            points.push(point);
+                            //                            points2.push(point);
+                        }
+                    }
+                }
+            }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            for (int bix = 0; bix < usampbound1.size() - 1; bix++) {
+                double x1 = get<0>(usampbound1[bix]);
+                double x2 = get<0>(usampbound1[bix + 1]);
+                double mu1 = get<1>(usampbound1[bix]);
+                double mu2 = get<1>(usampbound1[bix + 1]);
+                double dx = (x2 - x1) / (nx - 1);
+                for (int ix = 0; ix < nx; ix++) {
+                    if (ix < nx - 1 || (bix == usampbound1.size() - 2)) {
+                        double mu0 = ix * dx * (mu2 - mu1) / (x2 - x1) + mu1;
+                        double mui = max(mumin, mu0 - 2*muwidth);
+                        double muf = min(mumax, mu0 - muwidth);
+                        deque<double> mu(nmu);
+                        if (nmu == 1) {
+                            mu[0] = mui;
+                        }
+                        else {
+                            double dmu = (muf - mui) / (nmu - 1);
+                            for (int imu = 0; imu < nmu; imu++) {
+                                mu[imu] = mui + imu * dmu;
+                            }
+                        }
+                        for (int imu = 0; imu < nmu; imu++) {
+                            Point point;
+                            point.x = x1 + ix * dx;
+                            point.mu = mu[imu];
                             points.push(point);
                             //                            points2.push(point);
                         }
                     }
                 }
             }
+            for (int bix = 0; bix < usampbound1.size() - 1; bix++) {
+                double x1 = get<0>(usampbound1[bix]);
+                double x2 = get<0>(usampbound1[bix + 1]);
+                double mu1 = get<1>(usampbound1[bix]);
+                double mu2 = get<1>(usampbound1[bix + 1]);
+                double dx = (x2 - x1) / (nx - 1);
+                for (int ix = 0; ix < nx; ix++) {
+                    if (ix < nx - 1 || (bix == usampbound1.size() - 2)) {
+                        double mu0 = ix * dx * (mu2 - mu1) / (x2 - x1) + mu1;
+                        double mui = max(mumin, mu0 + muwidth);
+                        double muf = min(mumax, mu0 + 2*muwidth);
+                        deque<double> mu(nmu);
+                        if (nmu == 1) {
+                            mu[0] = mui;
+                        }
+                        else {
+                            double dmu = (muf - mui) / (nmu - 1);
+                            for (int imu = 0; imu < nmu; imu++) {
+                                mu[imu] = mui + imu * dmu;
+                            }
+                        }
+                        for (int imu = 0; imu < nmu; imu++) {
+                            Point point;
+                            point.x = x1 + ix * dx;
+                            point.mu = mu[imu];
+                            points.push(point);
+                            //                            points2.push(point);
+                        }
+                    }
+                }
+            }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             vector<Sample> usampbound2;
             for (int ix = 0; ix < nusampx; ix++) {
                 auto boundary = find_if(uWmuBWfsfmin.rbegin(), uWmuBWfsfmin.rend(), [&](const Sample & a) {
@@ -950,7 +1014,7 @@ int main(int argc, char** argv) {
                 Point point;
                 point.x = corx;
                 point.mu = cormu;
-                                    points.push(point);
+//                                    points.push(point);
             }
         }
 
@@ -969,7 +1033,7 @@ int main(int argc, char** argv) {
                 Point point;
                 point.x = lx;
                 point.mu = lmu;
-                                    points.push(point);
+//                                    points.push(point);
             }
         }
 
@@ -996,7 +1060,7 @@ int main(int argc, char** argv) {
                 Point point;
                 point.x = tx;
                 point.mu = tmu;
-                                    points.push(point);
+//                                    points.push(point);
                 //                    points2.push(point);
             }
         }
@@ -1139,11 +1203,11 @@ int main(int argc, char** argv) {
         printMath(os, "Js", resi, Js);
         printMath(os, "Us", resi, Us);
         printMath(os, "fs", resi, fs);
-        printMath(os, "fn0", resi, fn0);
+//        printMath(os, "fn0", resi, fn0);
         printMath(os, "fmin", resi, fmin);
-        printMath(os, "fmax", resi, fmax);
-        printMath(os, "f0", resi, f0);
-        printMath(os, "fth", resi, fth);
+//        printMath(os, "fmax", resi, fmax);
+//        printMath(os, "f0", resi, f0);
+//        printMath(os, "fth", resi, fth);
         //        printMath(os, "f2th", resi, f2th);
         printMath(os, "E0", resi, E0);
         printMath(os, "Eth", resi, Eth);
