@@ -1054,7 +1054,7 @@ int main(int argc, char** argv) {
             }
         }
 
-        getPoints(2.05e10, 2.12e11, 100, mufunc1, nmu, 0.01, points);
+        getPoints(2.05e10, 2.12e11, 140, mufunc1, nmu, 0.01, points);
         getPoints(2.22499e10, 7.43281e10, 40, mufunc2, nmu, 0.01, points);
         getPoints(7.7128e10, 1.97524e11, 100, mufunc3, nmu, 0.01, points);
 
