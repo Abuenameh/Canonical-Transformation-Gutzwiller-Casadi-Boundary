@@ -1064,10 +1064,54 @@ int main(int argc, char** argv) {
       Point point;
       point.x = p.first;
       point.mu = p.second;
-      points.push(point);
+//      points.push(point);
   }
         
-        /*{
+  double muwidth = 0.02;
+                                for (int ix = 0; ix < nx; ix++) {
+                                    double mu0 = 0.9411179399500129 - 3.5751626448519524e-13*x[ix] - 7.407324226206937e-24*x[ix]*x[ix] - 1.376619100837241e-35*x[ix]*x[ix]*x[ix] + 
+   4.1960731262022256e-47*x[ix]*x[ix]*x[ix]*x[ix]
+                                    double mui = max(mumin, mu0 - muwidth);
+                                    double muf = min(mumax, mu0 + muwidth);
+                                    deque<double> mu(nmu);
+                                    if (nmu == 1) {
+                                        mu[0] = mui;
+                                    } else {
+                                        double dmu = (muf - mui) / (nmu - 1);
+                                        for (int imu = 0; imu < nmu; imu++) {
+                                            mu[imu] = mui + imu * dmu;
+                                        }
+                                    }
+                                    for (int imu = 0; imu < nmu; imu++) {
+                                        Point point;
+                                        point.x = x[ix];
+                                        point.mu = mu[imu];
+                                        points.push(point);
+                                    }
+                                }
+                    for (int ix = 0; ix < nx; ix++) {
+                        double mu0 = 0.03557224884170837 - 4.1318226651330257e-13*x[ix] + 1.1199528880961205e-23*x[ix]*x[ix] - 3.0330199477565917e-35*x[ix]*x[ix]*x[ix];
+                        double mui = max(mumin, mu0 - muwidth);
+                        double muf = min(mumax, mu0 + muwidth);
+                        deque<double> mu(nmu);
+                        if (nmu == 1) {
+                            mu[0] = mui;
+                        }
+                        else {
+                            double dmu = (muf - mui) / (nmu - 1);
+                            for (int imu = 0; imu < nmu; imu++) {
+                                mu[imu] = mui + imu * dmu;
+                            }
+                        }
+                        for (int imu = 0; imu < nmu; imu++) {
+                            Point point;
+                            point.x = x[ix];
+                            point.mu = mu[imu];
+                            points.push(point);
+                        }
+                    }
+
+  /*{
             double x1min = 2.05e10;
             double x1max = 2.12e11;
             double nx1 = 10;
