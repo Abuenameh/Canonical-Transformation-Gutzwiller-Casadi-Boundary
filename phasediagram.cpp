@@ -447,6 +447,18 @@ double mufunc3(double x) {
     return 1.77820606358231 - 1.9795818263926455e-11*x + 1.1897718315201328e-22*x*x - 2.9480343588099163e-34*x*x*x;
 }
 
+double mufunc21(double x) {
+    return 0.039651765543844045 - 8.091427231493942e-14*x + 6.870416438164293e-24*x*x - 1.6237196043250407e-35*x*x*x;
+}
+
+double mufunc22(double x) {
+    return 0.7709293924538037 - 4.597226957758319e-14*x + 4.9771759289829554e-23*x*x - 4.3092426471947455e-34*x*x*x;
+}
+
+double mufunc23(double x) {
+    return 1.0207848551343182 - 1.1056502568970083e-12*x - 1.783715997600965e-23*x*x + 4.819023598288704e-35*x*x*x;
+}
+
 void getPoints(double xmin, double xmax, int nx, double (*mufunc)(double), int nmu, double muwidth, queue<Point>& points) {
     deque<double> x(nx);
     double dx = (xmax - xmin) / (nx - 1);
@@ -1054,9 +1066,13 @@ int main(int argc, char** argv) {
             }
         }
 
-        getPoints(2.05e10, 2.12e11, 140, mufunc1, nmu, 0.01, points);
-        getPoints(2.22499e10, 7.43281e10, 40, mufunc2, nmu, 0.01, points);
-        getPoints(7.7128e10, 1.97524e11, 100, mufunc3, nmu, 0.01, points);
+//        getPoints(2.05e10, 2.12e11, 140, mufunc1, nmu, 0.01, points);
+//        getPoints(2.22499e10, 7.43281e10, 40, mufunc2, nmu, 0.01, points);
+//        getPoints(7.7128e10, 1.97524e11, 100, mufunc3, nmu, 0.01, points);
+        
+        getPoints(3.56894e10, 2.45122e11, 10, mufunc21, nmu, 0.01, points);
+        getPoints(2.001e10, 7.32081e10, 10, mufunc22, nmu, 0.01, points);
+        getPoints(7.6008e10, 1.48245e11, 10, mufunc23, nmu, 0.01, points);
 
         /*{
             double x1min = 2.05e10;
