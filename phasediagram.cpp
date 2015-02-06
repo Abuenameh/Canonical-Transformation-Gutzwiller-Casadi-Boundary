@@ -1070,9 +1070,9 @@ int main(int argc, char** argv) {
 //        getPoints(2.22499e10, 7.43281e10, 40, mufunc2, nmu, 0.01, points);
 //        getPoints(7.7128e10, 1.97524e11, 100, mufunc3, nmu, 0.01, points);
         
-        getPoints(3.56894e10, 2.45122e11, 10, mufunc21, nmu, 0.01, points);
-        getPoints(2.001e10, 7.32081e10, 10, mufunc22, nmu, 0.01, points);
-        getPoints(7.6008e10, 1.48245e11, 10, mufunc23, nmu, 0.01, points);
+        getPoints(3.56894e10, 2.45122e11, 150, mufunc21, nmu, 0.01, points);
+        getPoints(2.001e10, 7.32081e10, 50, mufunc22, nmu, 0.01, points);
+        getPoints(7.6008e10, 1.48245e11, 50, mufunc23, nmu, 0.01, points);
 
         /*{
             double x1min = 2.05e10;
