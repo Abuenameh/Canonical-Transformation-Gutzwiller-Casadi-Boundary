@@ -156,6 +156,14 @@ void phasepoints(Parameter& xi, double theta, queue<Point>& points, vector<Point
     for (int i = 0; i < ndim; i++) {
         xrand[i] = xuni(xrng);
     }
+    vector<double> qwe({0.0142705160556345,0.0141396339342913,0.706964080814474,0.706964080814474,5.95137028391344e-9,-3.6098467102917e-9,7.3612431639489e-10,
+   6.96611785509177e-11,4.69527966303103e-11,2.27371873735595e-11,-7.94240186103483e-11,-4.51310428450977e-10,-4.57195443023687e-10,
+   -3.0877137536882e-10,-2.80257818425025e-12,1.60038988397016e-11});
+       for (int i = 0; i < L; i++) {
+   for (int j = 0; j < 2*dim; j++) {
+       xrand[i*2*dim+j] = qwe[j];
+       }
+   }
 
     vector<double> x(ndim);
     vector<complex<double>*> f(L);
