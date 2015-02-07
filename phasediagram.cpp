@@ -1058,13 +1058,14 @@ int main(int argc, char** argv) {
 //        getPoints(2.22499e10, 7.43281e10, 40, mufunc2, nmu, 0.01, points);
 //        getPoints(7.7128e10, 1.97524e11, 100, mufunc3, nmu, 0.01, points);
 
-        vector<pair<double, double>> ps({{50000000000, 0.903265}, {159500000000, 0.666948}, {234500000000, 
-  0.166431}, {303500000000, 0.121481}, {309500000000, 0.0942961}});
+//        vector<pair<double, double>> ps({{50000000000, 0.903265}, {159500000000, 0.666948}, {234500000000, 
+//  0.166431}, {303500000000, 0.121481}, {309500000000, 0.0942961}});
+  vector<pair<double, double>> ps({{2.60100166944908e10,0.0366959735767002}});
   for (pair<double, double> p : ps) {
       Point point;
       point.x = p.first;
       point.mu = p.second;
-//      points.push(point);
+      points.push(point);
   }
         
   double muwidth = 0.02;
@@ -1086,7 +1087,7 @@ int main(int argc, char** argv) {
                                         Point point;
                                         point.x = x[ix];
                                         point.mu = mu[imu];
-                                        points.push(point);
+//                                        points.push(point);
                                     }
                                 }
                     for (int ix = 0; ix < nx; ix++) {
@@ -1107,7 +1108,7 @@ int main(int argc, char** argv) {
                             Point point;
                             point.x = x[ix];
                             point.mu = mu[imu];
-                            points.push(point);
+//                            points.push(point);
                         }
                     }
 
