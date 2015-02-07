@@ -138,6 +138,7 @@ double GroundStateProblem::E(const vector<double>& f, vector<double>& grad) {
             }
         }
     }
+//    cout << setprecision(20) << E << endl;
     return E;
 }
 

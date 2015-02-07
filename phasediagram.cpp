@@ -182,6 +182,7 @@ void phasepoints(Parameter& xi, double theta, queue<Point>& points, vector<Point
 
     GroundStateProblem* prob;
     opt lopt(LD_LBFGS, ndim);
+//    opt lopt(LD_CCSAQ, ndim);
     opt gopt(GN_DIRECT, ndim);
     //    energyprob eprob(ndim);
     //    pagmo::algorithm::de_1220 algo(100);
@@ -198,8 +199,10 @@ void phasepoints(Parameter& xi, double theta, queue<Point>& points, vector<Point
         gopt.set_min_objective(energyfunc, prob);
         gopt.set_maxtime(120);
         //                lopt.set_maxtime(120);
-        //        lopt.set_ftol_abs(1e-17);
-        //        lopt.set_ftol_rel(1e-17);
+//                lopt.set_ftol_abs(1e-17);
+//                lopt.set_ftol_rel(1e-17);
+//                lopt.set_xtol_abs(1e-17);
+//                lopt.set_xtol_rel(1e-17);
 
         //                eprob.setProblem(prob);
     }
@@ -280,6 +283,7 @@ void phasepoints(Parameter& xi, double theta, queue<Point>& points, vector<Point
             cout << e.what() << endl;
             E0 = numeric_limits<double>::quiet_NaN();
         }
+//        cout << ::math(x0) << endl;
         pointRes.status0 = result0;
         //        pointRes.status0 = prob->getStatus();
         pointRes.runtime0 = prob->getRuntime();
@@ -1287,7 +1291,7 @@ int main(int argc, char** argv) {
         //        printMath(os, "fn0", resi, fn0);
         printMath(os, "fmin", resi, fmin);
         //        printMath(os, "fmax", resi, fmax);
-        //        printMath(os, "f0", resi, f0);
+                printMath(os, "f0", resi, f0);
         //        printMath(os, "fth", resi, fth);
         //        printMath(os, "f2th", resi, f2th);
         printMath(os, "E0", resi, E0);
