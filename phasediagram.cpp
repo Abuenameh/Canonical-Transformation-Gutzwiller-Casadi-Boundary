@@ -1118,10 +1118,10 @@ int main(int argc, char** argv) {
             }
         }
         
-        for (int ix = 0; ix < 100; ix++) {
-            double x = 2e10 + ix*(3e11 - 2e10)/(100-1);
-            for (int imu = 0; imu < 100; imu++) {
-                double mu = imu/(100-1);
+        for (int ix = 0; ix < 20; ix++) {
+            double x = 2e10 + ix*(3e11 - 2e10)/(20-1);
+            for (int imu = 0; imu < 20; imu++) {
+                double mu = imu/(20-1);
                 Point point;
                 point.x = x;
                 point.mu = mu;
