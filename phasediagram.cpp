@@ -1119,10 +1119,10 @@ int main(int argc, char** argv) {
         }
         
         double muwidth2 = 0.1;
-        int nmu2 = 10;
-        int nx2 = 20;
+        int nmu2 = 6;
+        int nx2 = 100;
         for (int ix = 0; ix < nx2; ix++) {
-            double x = 2e10 + ix*(3e11 - 2e10)/(nx2-1);
+            double x = 2e10 + ix*(2.6e11 - 2e10)/(nx2-1);
 //                double mu0 = -0.018989311717356086 + 6.87667461054985e-13*x + 7.7264998850342525e-25*x*x - 2.069564731044878e-36*x*x*x;
                 double mu0 = 0.032913659749522636 - 2.9822328051812337e-13*x + 8.053722708617216e-24*x*x - 1.8763641134601787e-35*x*x*x;
                 double mui = mu0 - muwidth2;
@@ -1136,7 +1136,7 @@ int main(int argc, char** argv) {
             }
         }
         for (int ix = 0; ix < nx2; ix++) {
-            double x = 2e10 + ix*(3e11 - 2e10)/(nx2-1);
+            double x = 2e10 + ix*(2.6e11 - 2e10)/(nx2-1);
 //                double mu0 = 0.9464941207678484 - 2.5363733791190035e-13*x - 1.961773720477146e-23*x*x + 3.7097027455669513e-35*x*x*x;
                 double mu0 = 0.9681686436831983 - 8.658141185587507e-13*x - 1.101464387746557e-23*x*x + 1.1101188794879753e-35*x*x*x;
                 double mui = mu0 - muwidth2;
