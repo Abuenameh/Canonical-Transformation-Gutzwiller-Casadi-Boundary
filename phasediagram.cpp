@@ -1118,9 +1118,22 @@ int main(int argc, char** argv) {
             }
         }
         
+        int nmu2 = 20;
+        int nx2 = 20;
+        for (int ix = 0; ix < nx2; ix++) {
+            double x = 2e10 + ix*(3e11 - 2e10)/(nx2-1);
+            for (int imu = 0; imu < nmu2; imu++) {
+                double mu = imu/(nmu2 - 1.);
+                Point point;
+                point.x = x;
+                point.mu = mu;
+                points.push(point);
+            }
+        }
+        
         double muwidth2 = 0.1;
-        int nmu2 = 6;
-        int nx2 = 100;
+//        int nmu2 = 6;
+//        int nx2 = 100;
         for (int ix = 0; ix < nx2; ix++) {
             double x = 2e10 + ix*(2.6e11 - 2e10)/(nx2-1);
 //                double mu0 = -0.018989311717356086 + 6.87667461054985e-13*x + 7.7264998850342525e-25*x*x - 2.069564731044878e-36*x*x*x;
@@ -1132,7 +1145,7 @@ int main(int argc, char** argv) {
                 Point point;
                 point.x = x;
                 point.mu = mu;
-                points.push(point);
+//                points.push(point);
             }
         }
         for (int ix = 0; ix < nx2; ix++) {
@@ -1146,7 +1159,7 @@ int main(int argc, char** argv) {
                 Point point;
                 point.x = x;
                 point.mu = mu;
-                points.push(point);
+//                points.push(point);
             }
         }
 
