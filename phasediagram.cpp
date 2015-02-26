@@ -1177,10 +1177,10 @@ int main(int argc, char** argv) {
         }
         
         
-        for (int ix = 0; ix < 10; ix++) {
-            double x = 2e10 + ix*(2.6e11 - 2e10)/(10-1);
-            for (int imu = 0; imu < 10; imu++) {
-                double mu = imu/(10.-1);
+        for (int ix = 0; ix < 50; ix++) {
+            double x = 2e10 + ix*(2.6e11 - 2e10)/(50-1);
+            for (int imu = 0; imu < 50; imu++) {
+                double mu = imu/(50.-1);
                 points.push({x, mu});
             }
         }
