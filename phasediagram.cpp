@@ -657,7 +657,7 @@ int main(int argc, char** argv) {
         queue<Point> points2;
         //            if (false)
         {
-            double muwidth = 0.02;
+            double muwidth = 0.05;
             //            queue<Point> points;
             
                 queue<Point> lpoints;
