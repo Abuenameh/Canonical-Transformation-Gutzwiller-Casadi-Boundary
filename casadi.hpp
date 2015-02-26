@@ -35,6 +35,9 @@ public:
     
     static void setup();
     
+    static double energy2(vector<double>& fin, vector<double>& J, double U0, vector<double>& dU, double mu, double theta);
+    static double energy2(int i, int n, vector<double>& fin, vector<double>& J, double U0, vector<double>& dU, double mu, double theta);
+    
 private:
     
     ptime start_time;

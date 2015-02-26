@@ -31,6 +31,18 @@ inline int mod(int i) {
 	return (i + L) % L;
 }
 
+inline double g2(int n, int m) {
+    return sqrt(1.0*(n + 1) * m);
+}
+
+inline double eps(vector<double>& U, int i, int j, int n, int m) {
+	return n * U[i] - (m - 1) * U[j];
+}
+
+inline double eps(double U, int n, int m) {
+    return (n - m + 1) * U;
+}
+
 inline SX g(int n, int m) {
     return sqrt(1.0*(n + 1) * m);
 }

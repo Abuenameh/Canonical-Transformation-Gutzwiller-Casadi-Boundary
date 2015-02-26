@@ -357,6 +357,7 @@ void phasepoints(Parameter& xi, double theta, queue<Point>& points, vector<Point
 
             pointRes.fth = xth;
             pointRes.Eth = Eth;
+            pointRes.Eth = GroundStateProblem::energy2(x0, J, U0, dU, point.mu, 0);
 
             //            prob->setTheta(2 * theta);
             //
@@ -660,7 +661,7 @@ int main(int argc, char** argv) {
             double muwidth = 0.05;
             //            queue<Point> points;
             
-                queue<Point> lpoints;
+                /*queue<Point> lpoints;
             double mulsampwidth = 0.02;
             for (int ix = 0; ix < nlsampx; ix++) {
                 //                double mu0 = 0.03615582350346575 - 5.005273114442404e-14*x[ix] + 6.275817853250553e-24*x[ix]*x[ix] - 1.4195907309128102e-35*x[ix]*x[ix]*x[ix]; // Delta = 0.25
@@ -748,7 +749,7 @@ int main(int argc, char** argv) {
                         }
                     }
                 }
-            }
+            }*/
 
             /*int nldx = 5;
             for (int ix = 0; ix < nldx*(nlsampx - 1); ix++) {
@@ -800,7 +801,7 @@ int main(int argc, char** argv) {
                 }
             }*/
 
-            queue<Point> upoints;
+            /*queue<Point> upoints;
             double muusampwidth = 0.05;
             for (int ix = 0; ix < nusampx; ix++) {
 //                                    double mu0 = 1.0275844755940469 - 1.3286603408812447e-12*usampx[ix] - 1.9177090288512203e-23*usampx[ix]*usampx[ix] + 9.572518996956652e-35*usampx[ix]*usampx[ix]*usampx[ix] - 2.095759744296641e-46*usampx[ix]*usampx[ix]*usampx[ix]*usampx[ix]; // Delta 0.25
@@ -930,7 +931,7 @@ int main(int argc, char** argv) {
                         }
                     }
                 }
-            }
+            }*/
 
             /*int nudx = 5;
             for (int ix = 0; ix < nudx*(nusampx-1); ix++) {
@@ -1174,6 +1175,11 @@ int main(int argc, char** argv) {
 //                points.push(point);
             }
         }
+        
+        points.push({2e10, 0.5});
+        points.push({1e11, 0.5});
+        points.push({2e11, 0.5});
+        points.push({3e11, 0.5});
 
         /*{
                   double x1min = 2.05e10;

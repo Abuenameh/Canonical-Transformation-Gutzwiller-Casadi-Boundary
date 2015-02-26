@@ -155,6 +155,17 @@ void GroundStateProblem::setTheta(double theta) {
     params.back() = theta;
 }
 
+double GroundStateProblem::energy2(vector<double>& fin, vector<double>& J, double U0, vector<double>& dU, double mu, double theta) {
+
+    double E = 0;
+    for (int i = 0; i < L; i++) {
+        for (int n = 0; n <= nmax; n++) {
+        E += energy2(i, n, fin, J, U0, dU, mu, theta);
+        }
+    }
+    return E;
+}
+
 SX GroundStateProblem::energy(vector<SX>& fin, vector<SX>& J, SX& U0, vector<SX>& dU, SX& mu, SX& theta) {
 
     SX E = 0;
@@ -164,6 +175,54 @@ SX GroundStateProblem::energy(vector<SX>& fin, vector<SX>& J, SX& U0, vector<SX>
         }
     }
     return E;
+}
+
+double GroundStateProblem::energy2(int i, int n, vector<double>& fin, vector<double>& J, double U0, vector<double>& dU, double mu, double theta) {
+
+    complex<double> expth = complex<double>(cos(theta), sin(theta));
+    complex<double> expmth = ~expth;
+    complex<double> exp2th = expth*expth;
+    complex<double> expm2th = ~exp2th;
+
+    vector<complex<double>* > f(L);
+    vector<double> norm2(L, 0);
+    for (int j = 0; j < L; j++) {
+        f[j] = reinterpret_cast<complex<double>*> (&fin[2 * j * dim]);
+        for (int m = 0; m <= nmax; m++) {
+            norm2[j] += f[j][m].real() * f[j][m].real() + f[j][m].imag() * f[j][m].imag();
+        }
+    }
+
+    complex<double> E = complex<double>(0, 0);
+
+    complex<double> Ei, Ej1, Ej2, Ej1j2, Ej1k1, Ej2k2;
+
+    //    for (int i = 0; i < L; i++) {
+
+    int k1 = mod(i - 2);
+    int j1 = mod(i - 1);
+    int j2 = mod(i + 1);
+    int k2 = mod(i + 2);
+
+    Ej1 = complex<double>(0, 0);
+    Ej2 = complex<double>(0, 0);
+
+            for (int m = 1; m <= nmax; m++) {
+                if (n != m - 1) {
+                    Ej1 += J[j1] * expth * g2(n, m) * (eps(dU, i, j1, n, m) / eps(U0, n, m))
+                            * ~f[i][n + 1] * ~f[j1][m - 1] * f[i][n] * f[j1][m];
+                    Ej2 += J[i] * expmth * g2(n, m) * (eps(dU, i, j2, n, m) / eps(U0, n, m))
+                            * ~f[i][n + 1] * ~f[j2][m - 1] * f[i][n] * f[j2][m];
+                }
+            }
+    
+    Ej1 /= norm2[i] * norm2[j1];
+    Ej2 /= norm2[i] * norm2[j2];
+
+    E += Ej1;
+    E += Ej2;
+    
+    return E.real();
 }
 
 SX GroundStateProblem::energy(int i, int n, vector<SX>& fin, vector<SX>& J, SX& U0, vector<SX>& dU, SX& mu, SX& theta) {
