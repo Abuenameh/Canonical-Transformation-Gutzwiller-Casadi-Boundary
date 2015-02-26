@@ -831,7 +831,7 @@ int main(int argc, char** argv) {
 
             thread_group uthreads;
             for (int i = 0; i < numthreads; i++) {
-//                uthreads.create_thread(bind(&phasepoints, boost::ref(xi), theta, boost::ref(upoints), boost::ref(upointRes), boost::ref(uprogress)));
+                uthreads.create_thread(bind(&phasepoints, boost::ref(xi), theta, boost::ref(upoints), boost::ref(upointRes), boost::ref(uprogress)));
             }
             uthreads.join_all();
 
