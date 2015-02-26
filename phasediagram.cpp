@@ -822,6 +822,7 @@ int main(int argc, char** argv) {
                     point.x = usampx[ix];
                     point.mu = mu[imu];
                     upoints.push(point);
+                    points.push(point);
 //                    points2.push(point);
                 }
             }
