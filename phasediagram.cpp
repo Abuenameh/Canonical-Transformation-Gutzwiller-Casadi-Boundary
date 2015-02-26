@@ -661,7 +661,7 @@ int main(int argc, char** argv) {
             //            queue<Point> points;
             
                 queue<Point> lpoints;
-            double mulsampwidth = 0.075;
+            double mulsampwidth = 0.02;
             for (int ix = 0; ix < nlsampx; ix++) {
                 //                double mu0 = 0.03615582350346575 - 5.005273114442404e-14*x[ix] + 6.275817853250553e-24*x[ix]*x[ix] - 1.4195907309128102e-35*x[ix]*x[ix]*x[ix]; // Delta = 0.25
                 //                double mu0 = 0.025470163481530313 - 2.2719398923789667e-13*x[ix] + 8.92045173286913e-24*x[ix]*x[ix] - 2.4033506846113224e-35*x[ix]*x[ix]*x[ix]; // Delta = 0.1
