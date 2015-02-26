@@ -685,7 +685,7 @@ int main(int argc, char** argv) {
                     point.x = lsampx[ix];
                     point.mu = mu[imu];
                     lpoints.push(point);
-                    points.push(point);
+//                    points.push(point);
                 }
             }
 
