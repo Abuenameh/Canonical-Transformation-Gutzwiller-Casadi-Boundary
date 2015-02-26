@@ -1176,10 +1176,14 @@ int main(int argc, char** argv) {
             }
         }
         
-        points.push({2e10, 0.5});
-        points.push({1e11, 0.5});
-        points.push({2e11, 0.5});
-        points.push({3e11, 0.5});
+        
+        for (int ix = 0; ix < 10; ix++) {
+            double x = 2e10 + ix*(2.6e11 - 2e10)/(10-1);
+            for (int imu = 0; imu < 10; imu++) {
+                double mu = imu/(10.-1);
+                points.push({x, mu});
+            }
+        }
 
         /*{
                   double x1min = 2.05e10;
