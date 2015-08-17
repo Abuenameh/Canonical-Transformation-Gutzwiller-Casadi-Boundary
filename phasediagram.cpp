@@ -182,6 +182,7 @@ void phasepoints(Parameter& xi, double theta, queue<Point>& points, vector<Point
 
     GroundStateProblem* prob;
     opt lopt(LD_LBFGS, ndim);
+//    opt lopt(LD_AUGLAG, ndim);
     //    opt lopt(LD_CCSAQ, ndim);
     opt gopt(GN_DIRECT, ndim);
     //    energyprob eprob(ndim);
@@ -194,6 +195,10 @@ void phasepoints(Parameter& xi, double theta, queue<Point>& points, vector<Point
         lopt.set_lower_bounds(-1);
         lopt.set_upper_bounds(1);
         lopt.set_min_objective(energyfunc, prob);
+//        lopt.set_ftol_abs(1e-30);
+//        lopt.set_ftol_rel(1e-30);
+//        lopt.set_xtol_abs(1e-30);
+//        lopt.set_xtol_rel(1e-30);
         gopt.set_lower_bounds(-1);
         gopt.set_upper_bounds(1.1);
         gopt.set_min_objective(energyfunc, prob);
@@ -238,6 +243,9 @@ void phasepoints(Parameter& xi, double theta, queue<Point>& points, vector<Point
             J[i] = JWij(W[i], W[mod(i + 1)]) / UW(point.x) / scale;
             //            J[i] = JWij(point.x, point.x) / UW(point.x) / scale;
         }
+//        cout << endl << ::math(dU) << endl << endl;
+//        cout << endl << ::math(J) << endl << endl;
+//        cout << endl << point.mu << endl << endl;
         pointRes.Ux = UW(point.x);
         pointRes.Jx = JWij(point.x, point.x);
         pointRes.J = J;
@@ -298,12 +306,15 @@ void phasepoints(Parameter& xi, double theta, queue<Point>& points, vector<Point
             fmax[i] = *max_element(fabs[i].begin(), fabs[i].end());
             fn0[i] = fabs[i][1];
         }
+//        cout << endl << ::math(x0) << endl << endl;
 
         pointRes.fmin = *min_element(fn0.begin(), fn0.end());
         pointRes.fn0 = fn0;
         pointRes.fmax = fmax;
         pointRes.f0 = x0;
         pointRes.E0 = E0;
+        
+        pointRes.Eth = numeric_limits<double>::infinity();
 
         double count = 0;
         for (int j = 0; j < 1; j++) {
@@ -314,13 +325,16 @@ void phasepoints(Parameter& xi, double theta, queue<Point>& points, vector<Point
             //                    generate(xth.begin(), xth.end(), randx);
             //                    generate(x2th.begin(), x2th.end(), randx);
 
-            if (j == 1) {
-                copy(x0.begin(), x0.end(), xth.begin());
-                copy(x0.begin(), x0.end(), x2th.begin());
-            }
+//            if (j == 1) {
+//                copy(x0.begin(), x0.end(), xth.begin());
+//                copy(x0.begin(), x0.end(), x2th.begin());
+//            }
 
             prob->setTheta(theta);
 
+    for (int i = 0; i < ndim; i++) {
+        xth[i] = xuni(xrng);
+    }
             double Eth;
             string resultth;
             try {
@@ -354,10 +368,26 @@ void phasepoints(Parameter& xi, double theta, queue<Point>& points, vector<Point
                     xth[2 * (i * dim + n) + 1] /= norms[i];
                 }
             }
+//        cout << endl << ::math(xth) << endl << endl;
+            vector<double> grad(2*L*dim);
+            prob->E(xth,grad);
+            double maxg = 0;
+            for (int i = 0; i < 2*L*dim; i++) {
+                maxg = max(maxg, abs(grad[i]));
+            }
+            cout << ::math(maxg) << endl;
+            prob->setTheta(0);
+            prob->E(x0,grad);
+            maxg = 0;
+            for (int i = 0; i < 2*L*dim; i++) {
+                maxg = max(maxg, abs(grad[i]));
+            }
+            cout << ::math(maxg) << endl;
+            cout << endl;
 
             pointRes.fth = xth;
-            pointRes.Eth = Eth;
-            pointRes.Eth = GroundStateProblem::energy2(x0, J, U0, dU, point.mu, 0);
+            pointRes.Eth = min(pointRes.Eth, Eth);
+//            pointRes.Eth = GroundStateProblem::energy2(x0, J, U0, dU, point.mu, 0);
 
             //            prob->setTheta(2 * theta);
             //
@@ -399,7 +429,7 @@ void phasepoints(Parameter& xi, double theta, queue<Point>& points, vector<Point
             //
             //            pointRes.fs = (E2th - 2 * Eth + E0) / (L * theta * theta);
 
-            pointRes.fs = (Eth - E0) / (L * theta * theta);
+            pointRes.fs = (pointRes.Eth - E0) / (L * theta * theta);
 
             if (pointRes.fs > -1e-5) {
                 break;
@@ -1181,8 +1211,17 @@ int main(int argc, char** argv) {
             double x = 2e10 + ix*(2.6e11 - 2e10)/(50-1);
             for (int imu = 0; imu < 50; imu++) {
                 double mu = imu/(50.-1);
-                points.push({x, mu});
+//                points.push({x, mu});
             }
+        }
+        
+//        points.push({2.03922e11, 0.2667});
+        int nW = 100;
+        for (int i = 0; i < nW; i++) {
+            double Wi = 1e11;
+            double Wf = 3e11;
+            double W = Wi + i*(Wf - Wi)/(nW-1);
+            points.push({W, 0.2667});
         }
 
         /*{
