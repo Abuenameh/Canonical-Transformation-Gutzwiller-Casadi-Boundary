@@ -369,21 +369,21 @@ void phasepoints(Parameter& xi, double theta, queue<Point>& points, vector<Point
                 }
             }
 //        cout << endl << ::math(xth) << endl << endl;
-            vector<double> grad(2*L*dim);
-            prob->E(xth,grad);
-            double maxg = 0;
-            for (int i = 0; i < 2*L*dim; i++) {
-                maxg = max(maxg, abs(grad[i]));
-            }
-            cout << ::math(maxg) << endl;
-            prob->setTheta(0);
-            prob->E(x0,grad);
-            maxg = 0;
-            for (int i = 0; i < 2*L*dim; i++) {
-                maxg = max(maxg, abs(grad[i]));
-            }
-            cout << ::math(maxg) << endl;
-            cout << endl;
+//            vector<double> grad(2*L*dim);
+//            prob->E(xth,grad);
+//            double maxg = 0;
+//            for (int i = 0; i < 2*L*dim; i++) {
+//                maxg = max(maxg, abs(grad[i]));
+//            }
+//            cout << ::math(maxg) << endl;
+//            prob->setTheta(0);
+//            prob->E(x0,grad);
+//            maxg = 0;
+//            for (int i = 0; i < 2*L*dim; i++) {
+//                maxg = max(maxg, abs(grad[i]));
+//            }
+//            cout << ::math(maxg) << endl;
+//            cout << endl;
 
             pointRes.fth = xth;
             pointRes.Eth = min(pointRes.Eth, Eth);
