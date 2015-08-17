@@ -14,7 +14,7 @@
 
 using namespace std;
 
-const int L = 25;
+const int L = 100;
 const int nmax = 7;
 const int dim = nmax + 1;
 
