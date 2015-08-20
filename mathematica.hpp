@@ -28,6 +28,7 @@ using std::setprecision;
 using std::complex;
 using std::vector;
 
+#include <boost/lexical_cast.hpp>
 #include <boost/multi_array.hpp>
 #include <boost/algorithm/string.hpp>
 
@@ -112,7 +113,8 @@ ostream& operator<<(ostream& out, const mathematica<const int> m) {
 ostream& operator<<(ostream& out, const mathematica<double> m) {
     double d = m.d;
     ostringstream oss;
-    oss << setprecision(numeric_limits<double>::digits10) << d;
+//    oss << setprecision(numeric_limits<double>::digits10) << d;
+    oss << lexical_cast<string>(d);
     out << replace_all_copy(oss.str(), "e", "*^");
     return out;
 }
