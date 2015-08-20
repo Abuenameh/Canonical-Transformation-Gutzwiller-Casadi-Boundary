@@ -151,6 +151,7 @@ void phasepoints(Parameter& xi, double theta, queue<Point>& points, vector<Point
     int ndim = 2 * L * dim;
 
     boost::random::mt19937 xrng;
+    xrng.seed(time(NULL));
     boost::random::uniform_real_distribution<> xuni(0, 1);
     vector<double> xrand(ndim);
     for (int i = 0; i < ndim; i++) {
@@ -182,7 +183,7 @@ void phasepoints(Parameter& xi, double theta, queue<Point>& points, vector<Point
 
     GroundStateProblem* prob;
     opt lopt(LD_LBFGS, ndim);
-//    opt lopt(LD_AUGLAG, ndim);
+//    opt lopt(LN_SBPLX, ndim);
     //    opt lopt(LD_CCSAQ, ndim);
     opt gopt(GN_DIRECT, ndim);
     //    energyprob eprob(ndim);
@@ -195,10 +196,10 @@ void phasepoints(Parameter& xi, double theta, queue<Point>& points, vector<Point
         lopt.set_lower_bounds(-1);
         lopt.set_upper_bounds(1);
         lopt.set_min_objective(energyfunc, prob);
-//        lopt.set_ftol_abs(1e-30);
-//        lopt.set_ftol_rel(1e-30);
+//        lopt.set_ftol_abs(1e-14);
+//        lopt.set_ftol_rel(1e-16);
 //        lopt.set_xtol_abs(1e-30);
-//        lopt.set_xtol_rel(1e-30);
+//        lopt.set_xtol_rel(1e-16);
         gopt.set_lower_bounds(-1);
         gopt.set_upper_bounds(1.1);
         gopt.set_min_objective(energyfunc, prob);
@@ -1218,11 +1219,12 @@ int main(int argc, char** argv) {
 //        points.push({2.03922e11, 0.2667});
         int nW = 100;
         for (int i = 0; i < nW; i++) {
-            double Wi = 1e11;
-            double Wf = 3e11;
+            double Wi = 2e10;
+            double Wf = 1.5e11;
             double W = Wi + i*(Wf - Wi)/(nW-1);
-            points.push({W, 0.2667});
+//            points.push({W, 0.9});
         }
+        points.push({2e10,0.9});
 
         /*{
                   double x1min = 2.05e10;
@@ -1399,8 +1401,8 @@ int main(int argc, char** argv) {
         //        printMath(os, "fn0", resi, fn0);
         printMath(os, "fmin", resi, fmin);
         //        printMath(os, "fmax", resi, fmax);
-//                printMath(os, "f0", resi, f0);
-        //        printMath(os, "fth", resi, fth);
+                printMath(os, "f0", resi, f0);
+                printMath(os, "fth", resi, fth);
         //        printMath(os, "f2th", resi, f2th);
         printMath(os, "E0", resi, E0);
         printMath(os, "Eth", resi, Eth);
